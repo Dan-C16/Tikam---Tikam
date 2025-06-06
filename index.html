@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tikam-Tikam Game</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(5, 100px);
+      gap: 10px;
+      justify-content: center;
+      margin-top: 30px;
+    }
+    .box {
+      background: #ccc;
+      width: 100px;
+      height: 100px;
+      font-size: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border-radius: 10px;
+    }
+    .revealed {
+      background: #ffd966;
+      color: #000;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Tikam-Tikam 🎁</h1>
+<p>Click a box to reveal your number!</p>
+<div class="grid" id="gameGrid"></div>
+
+<script>
+  const prizes = [
+    "1", "2", "3", "4", "5",
+    "6", "7", "8", "9", "10",
+    "Better luck!", "Try again!", "Free sweet!", "Lucky number!", "Winner!"
+  ].sort(() => Math.random() - 0.5);
+
+  const grid = document.getElementById('gameGrid');
+
+  prizes.forEach(prize => {
+    const box = document.createElement('div');
+    box.className = 'box';
+    box.innerText = '?';
+    box.onclick = () => {
+      box.innerText = prize;
+      box.classList.add('revealed');
+      box.onclick = null; // disable after clicked
+    };
+    grid.appendChild(box);
+  });
+</script>
+
+</body>
+</html>
